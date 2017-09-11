@@ -10,9 +10,10 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = Obelisk.MODID, name = Obelisk.MODID, version = Obelisk.VERSION, acceptedMinecraftVersions = "[1.11, 1.12]")
+@Mod(modid = Obelisk.MODID, name = Obelisk.MODID, version = Obelisk.VERSION, acceptedMinecraftVersions = "[1.11, 1.13]")
 public class Obelisk {
 	public static final String MODID = "obelisk";
 	public static final String VERSION = "GRADLE:VERSION";
@@ -32,6 +33,11 @@ public class Obelisk {
 	@EventHandler
 	public void init(FMLInitializationEvent e){
 		proxy.init(e);
+	}
+	
+	@EventHandler
+	public void postInit(FMLPostInitializationEvent e){
+		proxy.postInit(e);
 	}
 	
 }
