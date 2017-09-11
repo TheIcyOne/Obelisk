@@ -35,15 +35,15 @@ public class BlockObelisk extends Block{
 				if (worldIn.provider.canRespawnHere())
             	{
             		if (!(worldIn.getBlockState(pos.down()).getBlock() instanceof BlockObsidian) || !(worldIn.getBlockState(pos.down(2)).getBlock() instanceof BlockObsidian)){
-            			player.addChatComponentMessage(new TextComponentTranslation("tile.obelisk.noObsidian", new Object[0]));
+            			player.sendMessage(new TextComponentTranslation("tile.obelisk.noObsidian", new Object[0]));
                         return true;
             		}
             			BlockPos chunkcoords = getSafeSpawnLocation(worldIn,(int) player.posX,(int) player.posY,(int) player.posZ, 0);
             			player.setSpawnChunk(chunkcoords, true, player.dimension);
-            			player.addChatComponentMessage(new TextComponentTranslation("tile.obelisk.spawnSet", new Object[0]));
+            			player.sendMessage(new TextComponentTranslation("tile.obelisk.spawnSet", new Object[0]));
             			return true;
             	}
-				player.addChatComponentMessage(new TextComponentTranslation("tile.obelisk.whatTheHell", new Object[0]));
+				player.sendMessage(new TextComponentTranslation("tile.obelisk.whatTheHell", new Object[0]));
             	return true;
             }
             return true;
