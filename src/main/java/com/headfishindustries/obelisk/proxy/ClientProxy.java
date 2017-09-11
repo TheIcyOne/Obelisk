@@ -1,18 +1,18 @@
 package com.headfishindustries.obelisk.proxy;
 
-import com.headfishindustries.obelisk.blocks.BlockObelisk;
-
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class ClientProxy extends CommonProxy{
 	
 	@Override
+	public void preInit(FMLPreInitializationEvent e){
+		super.preInit(e);
+	}
+	
+	@Override
 	public void init(FMLInitializationEvent e){
-		
-		BlockObelisk obelisk = (BlockObelisk) new BlockObelisk().setUnlocalizedName("obelisk:spawn_obelisk").setCreativeTab(CreativeTabs.tabDecorations);
-		GameRegistry.registerBlock(obelisk, "spawnObelisk");
+		super.init(e);
 	}
 	
 }

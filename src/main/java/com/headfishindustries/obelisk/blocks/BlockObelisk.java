@@ -1,57 +1,58 @@
 package com.headfishindustries.obelisk.blocks;
 
+import javax.annotation.Nullable;
+
 import com.headfishindustries.obelisk.Obelisk;
 
-import cpw.mods.fml.common.FMLLog;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockBed;
-import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.BlockObsidian;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 public class BlockObelisk extends Block{
 
 	public BlockObelisk() {
-		super(Material.rock);
+		super(Material.ROCK);
 		setHardness(5f);
 		setResistance(-1f);
-		this.setHarvestLevel("pickaxe", 3);
+		setHarvestLevel("pickaxe", 3);
+		setRegistryName(Obelisk.MODID + ":spawn_obelisk");
+		setUnlocalizedName(Obelisk.MODID + ":spawn_obelisk");
+		setCreativeTab(CreativeTabs.DECORATIONS);
 	}
 	
-	@Override
-	public void registerIcons(IIconRegister IIconRegister){
-		this.blockIcon = IIconRegister.registerIcon(Obelisk.MODID + ":spawn_obelisk");
-}
-	
-	public boolean onBlockActivated(World worldIn, int x, int y, int z, EntityPlayer player, int side, float subX, float subY, float subZ)
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
     { 
 		if (!worldIn.isRemote){
 				if (worldIn.provider.canRespawnHere())
             	{
-            		if (!(worldIn.getBlock(x, y-1, z) instanceof BlockObsidian) || !(worldIn.getBlock(x, y-2, z) instanceof BlockObsidian)){
-            			player.addChatComponentMessage(new ChatComponentTranslation("tile.obelisk.noObsidian", new Object[0]));
+            		if (!(worldIn.getBlockState(pos.down()).getBlock() instanceof BlockObsidian) || !(worldIn.getBlockState(pos.down(2)).getBlock() instanceof BlockObsidian)){
+            			player.addChatComponentMessage(new TextComponentTranslation("tile.obelisk.noObsidian", new Object[0]));
                         return true;
             		}
-            			ChunkCoordinates chunkcoords = getSafeSpawnLocation(worldIn,(int) player.posX,(int) player.posY,(int) player.posZ, 0);
-            			player.setSpawnChunk(chunkcoords, true);
-            			player.addChatComponentMessage(new ChatComponentTranslation("tile.obelisk.spawnSet", new Object[0]));
+            			BlockPos chunkcoords = getSafeSpawnLocation(worldIn,(int) player.posX,(int) player.posY,(int) player.posZ, 0);
+            			player.setSpawnChunk(chunkcoords, true, player.dimension);
+            			player.addChatComponentMessage(new TextComponentTranslation("tile.obelisk.spawnSet", new Object[0]));
             			return true;
             	}
-				player.addChatComponentMessage(new ChatComponentTranslation("tile.obelisk.whatTheHell", new Object[0]));
+				player.addChatComponentMessage(new TextComponentTranslation("tile.obelisk.whatTheHell", new Object[0]));
             	return true;
             }
             return true;
     }
 	
-	public static ChunkCoordinates getSafeSpawnLocation(World worldIn, int x, int y, int z, int safeIndex)
+	public static BlockPos getSafeSpawnLocation(World worldIn, int x, int y, int z, int safeIndex)
     {
 		//kthx I'll just do this
-        return new ChunkCoordinates(x, y, z);
+        return new BlockPos(x, y, z);
     }
 	
 
