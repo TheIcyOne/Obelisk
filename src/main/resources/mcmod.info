@@ -1,0 +1,16 @@
+[
+{
+  "modid": "obelisk",
+  "name": "Obelisk",
+  "description": "Sometimes a slightly glassy lavarock is magical. Sometimes it isn't.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["The_Icy_One"],
+  "credits": "No thanks, I prefer debits.",
+  "logoFile": "ObeliskLogo.png",
+  "screenshots": [],
+  "dependencies": []
+}
+]
