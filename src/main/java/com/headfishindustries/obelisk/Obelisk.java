@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = Obelisk.MODID, name = Obelisk.MODID, version = Obelisk.VERSION, acceptedMinecraftVersions = "[1.10.2, 1.12]")
+@Mod(modid = Obelisk.MODID, name = Obelisk.MODID, version = Obelisk.VERSION, acceptedMinecraftVersions = "[1.11, 1.12]")
 public class Obelisk {
 	public static final String MODID = "obelisk";
 	public static final String VERSION = "GRADLE:VERSION";
